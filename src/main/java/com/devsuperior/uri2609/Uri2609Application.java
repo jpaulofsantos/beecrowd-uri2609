@@ -27,6 +27,7 @@ public class Uri2609Application implements CommandLineRunner {
 
 		List<CategorySumProjection> categorySumProjectionList = repository.searchSQL();
 		List<CategorySumDTO> categorySumDTOList = categorySumProjectionList.stream().map(x-> new CategorySumDTO(x)).collect(Collectors.toList());
+		List<CategorySumDTO> categorySumDTOListJPQL = repository.searchJPQL();
 
 		System.out.println("");
 		System.out.println("-----SQL-PROJ-----");
@@ -39,6 +40,13 @@ public class Uri2609Application implements CommandLineRunner {
 		System.out.println("-----SQL-DTO-----");
 
 		for (CategorySumDTO item: categorySumDTOList) {
+			System.out.println(item.getName() + " - " + item.getSum());
+		}
+
+		System.out.println("");
+		System.out.println("-----JPQL-DTO-----");
+
+		for (CategorySumDTO item: categorySumDTOListJPQL) {
 			System.out.println(item.getName() + " - " + item.getSum());
 		}
 
